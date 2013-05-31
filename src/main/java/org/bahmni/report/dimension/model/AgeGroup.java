@@ -11,4 +11,12 @@ public class AgeGroup {
 
     private int maxAge;
 
+    public AgeGroup() {
+    }
+
+    public AgeGroup(int minAge, int maxAge) {
+        this.minAge = minAge;
+        this.maxAge = maxAge;
+    }
+
 }

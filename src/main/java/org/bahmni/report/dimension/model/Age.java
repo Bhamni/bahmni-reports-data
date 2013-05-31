@@ -9,4 +9,10 @@ public class Age {
 
     private int age;
 
+    public Age() {
+    }
+
+    public Age(int age) {
+        this.age = age;
+    }
 }

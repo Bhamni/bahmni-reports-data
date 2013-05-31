@@ -9,4 +9,11 @@ public class Provider {
 
     private ProviderType providerType;
 
+    public Provider() {
+    }
+
+    public Provider(ProviderType providerType) {
+        this.providerType = providerType;
+    }
+
 }

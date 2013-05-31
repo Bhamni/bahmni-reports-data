@@ -9,4 +9,11 @@ public class Gender {
 
     private String label;
 
+    public Gender() {
+    }
+
+    public Gender(String label) {
+        this.label = label;
+    }
+
 }

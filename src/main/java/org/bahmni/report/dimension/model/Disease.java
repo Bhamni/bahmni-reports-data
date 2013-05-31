@@ -9,4 +9,11 @@ public class Disease {
 
     private String name;
 
+    public Disease() {
+    }
+
+    public Disease(String name) {
+        this.name = name;
+    }
+
 }
