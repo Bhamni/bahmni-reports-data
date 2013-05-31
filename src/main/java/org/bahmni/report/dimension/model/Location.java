@@ -1,4 +1,4 @@
-package org.bahmni.report.fact.model;
+package org.bahmni.report.dimension.model;
 
 import lombok.Data;
 
@@ -6,13 +6,17 @@ import lombok.Data;
 public class Location {
 
     private String id;
+
     private String name;
+
+    private Level level;
 
     public Location() {
     }
 
-    public Location(String name) {
+    public Location(String name, Level level) {
         this.name = name;
+        this.level = level;
     }
 
 }

@@ -1,6 +1,7 @@
-package org.bahmni.report.fact.dao.mapper;
+package org.bahmni.report.dimension.dao.mapper;
 
-import org.bahmni.report.fact.model.Location;
+import org.bahmni.report.dimension.model.Level;
+import org.bahmni.report.dimension.model.Location;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class LocationMapperIT {
 
     @Test
     public void shouldGetAllLocations() {
-        Location ganiyari = new Location("Ganiyari");
-        Location bilaspur = new Location("Bilaspur");
+        Location ganiyari = new Location("Ganiyari", Level.Village);
+        Location bilaspur = new Location("Bilaspur", Level.Tehsil);
 
         locationMapper.insert(ganiyari);
         locationMapper.insert(bilaspur);
@@ -37,6 +38,10 @@ public class LocationMapperIT {
         List<Location> locations = locationMapper.getAll();
 
         assertEquals(2, locations.size());
+        assertEquals("Ganiyari", locations.get(0).getName());
+        assertEquals(Level.Village, locations.get(0).getLevel());
+        assertEquals("Bilaspur", locations.get(1).getName());
+        assertEquals(Level.Tehsil, locations.get(1).getLevel());
     }
 
 }
