@@ -152,9 +152,6 @@
                         </goals>
                         <configuration>
                             <argLine>-XX:MaxPermSize=256M</argLine>
-                            <runOrder>reversealphabetical</runOrder>
-                            <parallel>classes</parallel>
-                            <threadCount>4</threadCount>
                             <perCoreThreadCount>false</perCoreThreadCount>
                             <includes>
                                 <include>**//*IT.java</include>
