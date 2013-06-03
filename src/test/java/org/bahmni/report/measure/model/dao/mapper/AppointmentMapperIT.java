@@ -20,7 +20,7 @@ import static junit.framework.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 @Transactional
-@TransactionConfiguration(defaultRollback = true)
+@TransactionConfiguration(transactionManager ="transactionManager", defaultRollback = true)
 public class AppointmentMapperIT {
 
     @Autowired

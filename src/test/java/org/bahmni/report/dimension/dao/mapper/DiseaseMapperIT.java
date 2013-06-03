@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 @Transactional
-@TransactionConfiguration(defaultRollback = true)
+@TransactionConfiguration(transactionManager ="transactionManager", defaultRollback = true)
 public class DiseaseMapperIT {
 
     @Autowired
