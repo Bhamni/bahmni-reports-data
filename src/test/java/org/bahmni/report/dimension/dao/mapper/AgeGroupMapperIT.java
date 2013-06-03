@@ -38,8 +38,8 @@ public class AgeGroupMapperIT {
         List<AgeGroup> ageGroups = ageGroupMapper.getAll();
 
         assertEquals(2, ageGroups.size());
-        assertEquals(15, ageGroups.get(0).getMinAge());
-        assertEquals(30, ageGroups.get(0).getMaxAge());
+        assertEquals(new Integer(15), ageGroups.get(0).getMinAge());
+        assertEquals(new Integer(30), ageGroups.get(0).getMaxAge());
     }
 
 }

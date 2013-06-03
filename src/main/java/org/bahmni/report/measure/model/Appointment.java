@@ -11,4 +11,12 @@ public class Appointment {
 
     private String diseaseId;
 
+    public Appointment() {
+    }
+
+    public Appointment(AppointmentType appointmentType, String diseaseId) {
+        this.appointmentType = appointmentType;
+        this.diseaseId = diseaseId;
+    }
+
 }

@@ -17,4 +17,15 @@ public class Patient {
 
     private String locationId;
 
+    public Patient() {
+    }
+
+    public Patient(String firstName, String lastName, String ageId, String genderId, String locationId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ageId = ageId;
+        this.genderId = genderId;
+        this.locationId = locationId;
+    }
+
 }

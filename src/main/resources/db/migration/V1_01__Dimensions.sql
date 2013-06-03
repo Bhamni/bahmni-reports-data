@@ -1,6 +1,6 @@
 CREATE TABLE location
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     name varchar(160) NOT NULL,
     level varchar(160) NOT NULL,
     PRIMARY KEY (id)
@@ -8,28 +8,28 @@ CREATE TABLE location
 
 CREATE TABLE gender
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     label varchar(160) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE disease
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     name varchar(160) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE age
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     age integer NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE ageGroup
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     minAge integer NOT NULL,
     maxAge integer NOT NULL,
     PRIMARY KEY (id)
@@ -37,14 +37,14 @@ CREATE TABLE ageGroup
 
 CREATE TABLE provider
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     providerType varchar(160) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE dateDimension
 (
-    id int(11) NOT NULL auto_increment,
+    id serial NOT NULL,
     date date NOT NULL,
     year integer NOT NULL,
     month integer NOT NULL,

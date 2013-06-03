@@ -7,14 +7,14 @@ public class AgeGroup {
 
     private String id;
 
-    private int minAge;
+    private Integer minAge;
 
-    private int maxAge;
+    private Integer maxAge;
 
     public AgeGroup() {
     }
 
-    public AgeGroup(int minAge, int maxAge) {
+    public AgeGroup(Integer minAge, Integer maxAge) {
         this.minAge = minAge;
         this.maxAge = maxAge;
     }

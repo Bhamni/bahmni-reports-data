@@ -36,7 +36,7 @@ public class AgeMapperIT {
         List<Age> age = ageMapper.getAll();
 
         assertEquals(2, age.size());
-        assertEquals(34, age.get(0).getAge());
+        assertEquals(new Integer("34"), age.get(0).getAge());
     }
 
 }

@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class Age {
 
-    private int id;
+    private String id;
 
-    private int age;
+    private Integer age;
 
     public Age() {
     }
 
-    public Age(int age) {
+    public Age(Integer age) {
         this.age = age;
     }
 }
