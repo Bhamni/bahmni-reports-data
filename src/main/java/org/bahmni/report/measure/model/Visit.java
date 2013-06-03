@@ -10,4 +10,13 @@ public class Visit {
     private VisitType visitType;
 
     private AdmissionStatus admissionStatus;
+
+    public Visit() {
+    }
+
+    public Visit(VisitType visitType, AdmissionStatus admissionStatus) {
+
+        this.visitType = visitType;
+        this.admissionStatus = admissionStatus;
+    }
 }

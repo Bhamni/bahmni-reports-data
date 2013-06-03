@@ -55,3 +55,26 @@ CREATE TABLE referral
     PRIMARY KEY (id)
 );
 
+CREATE TABLE encounter
+(
+    id serial NOT NULL,
+    appointmentType varchar(160) NOT NULL,
+    diseaseId varchar(10) NOT NULL,
+    PRIMARY KEY (id)
+);
+CREATE TABLE payment
+(
+    id serial NOT NULL,
+    paid varchar(20) NOT NULL,
+    amount float(20) NOT NULL,
+    discount float(20) NOT NULL,
+    PRIMARY KEY (id)
+);
+CREATE TABLE visit
+(
+    id serial NOT NULL,
+    visitType varchar(20) NOT NULL,
+    admissionStatus varchar(20) NOT NULL,
+    PRIMARY KEY (id)
+);
+
