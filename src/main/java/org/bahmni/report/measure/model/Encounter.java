@@ -12,4 +12,12 @@ public class Encounter {
 
     private String diseaseId;
 
+    public Encounter() {
+    }
+
+    public Encounter(AppointmentType appointmentType, String diseaseId) {
+
+        this.appointmentType = appointmentType;
+        this.diseaseId = diseaseId;
+    }
 }
