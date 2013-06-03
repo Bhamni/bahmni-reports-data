@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
+@TransactionConfiguration(defaultRollback = true)
 public class DiseaseMapperIT {
 
     @Autowired
@@ -40,10 +41,4 @@ public class DiseaseMapperIT {
         assertEquals(2, diseases.size());
     }
 
-    @AfterTransaction
-    @Rollback(true)
-    public void tearDown() throws Exception {
-
-
-    }
 }
