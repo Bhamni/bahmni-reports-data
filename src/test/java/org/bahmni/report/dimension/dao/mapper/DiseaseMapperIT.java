@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 @TransactionConfiguration(defaultRollback = true)
+@Transactional
 public class DiseaseMapperIT {
 
     @Autowired
@@ -28,7 +29,6 @@ public class DiseaseMapperIT {
     }
 
     @Test
-    @Transactional
     public void shouldGetAllDisease() {
         Disease disease1 = new Disease("TB");
         Disease disease2 = new Disease("fever");

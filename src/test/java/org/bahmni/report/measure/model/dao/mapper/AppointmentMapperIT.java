@@ -23,6 +23,7 @@ import static junit.framework.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
+@Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class AppointmentMapperIT {
 
@@ -36,7 +37,6 @@ public class AppointmentMapperIT {
     }
 
     @Test
-    @Transactional
     public void shouldGetAllAppointments() {
         diseaseMapper.insert(new Disease("Fever"));
         Disease fever = diseaseMapper.getAll().get(0);
