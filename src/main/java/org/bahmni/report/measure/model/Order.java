@@ -11,4 +11,12 @@ public class Order {
 
     private String name;
 
+    public Order() {
+    }
+
+    public Order(String type, String name) {
+        this.type = type;
+        this.name = name;
+    }
+
 }

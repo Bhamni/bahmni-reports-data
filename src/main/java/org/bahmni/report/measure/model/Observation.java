@@ -15,4 +15,14 @@ public class Observation {
 
     private String comment;
 
+    public Observation() {
+    }
+
+    public Observation(String name, String value, String unit, String comment) {
+        this.name = name;
+        this.value = value;
+        this.unit = unit;
+        this.comment = comment;
+    }
+
 }

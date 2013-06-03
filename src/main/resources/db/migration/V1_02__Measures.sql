@@ -29,3 +29,29 @@ CREATE TABLE diagnosis
     PRIMARY KEY (id)
 );
 
+CREATE TABLE observation
+(
+    id serial NOT NULL,
+    name varchar(160) NOT NULL,
+    value varchar(160) NOT NULL,
+    unit varchar(160) NOT NULL,
+    comment varchar(160) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE orderMeasure
+(
+    id serial NOT NULL,
+    name varchar(160) NOT NULL,
+    type varchar(160) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE referral
+(
+    id serial NOT NULL,
+    referralType varchar(160) NOT NULL,
+    providerId varchar(10) NOT NULL,
+    PRIMARY KEY (id)
+);
+

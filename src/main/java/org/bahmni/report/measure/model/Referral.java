@@ -11,4 +11,12 @@ public class Referral {
 
     private String providerId;
 
+    public Referral() {
+    }
+
+    public Referral(ReferralType referralType, String providerId) {
+        this.referralType = referralType;
+        this.providerId = providerId;
+    }
+
 }
