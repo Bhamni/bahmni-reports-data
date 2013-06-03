@@ -20,6 +20,8 @@
     <context:component-scan base-package="org.bahmni.report"/>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:annotation-driven proxy-target-class="true"/>
+
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource">
