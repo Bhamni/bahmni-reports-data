@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <setup>
 
+    <import class="org.databene.commons.TimeUtil"/>
+    <import class="org.joda.time.LocalDate"/>
     <import domains="person, patient, age, datetime, location"/>
     <import platforms="db"/>
 
@@ -10,24 +12,34 @@
     <database id="db" url="{dbUrl}" driver="{dbDriver}" schema="{dbSchema}"
               user="{dbUser}" password="{dbPassword}" catalog="{dbCatalog}"/>
 
-    <iterate source="genders.import.csv" type="gender" encoding="utf-8" consumer="db" />
-    <iterate source="locations.import.csv" type="location" encoding="utf-8" consumer="db" />
-    <iterate source="appointment.types.import.csv" type="appointmentType" encoding="utf-8" consumer="db" />
-    <iterate source="encounter.types.import.csv" type="encounterType" encoding="utf-8" consumer="db" />
+    <iterate source="genders.import.csv" type="gender" encoding="utf-8" consumer="db"/>
+    <iterate source="locations.import.csv" type="location" encoding="utf-8" consumer="db"/>
+    <iterate source="appointment.types.import.csv" type="appointmentType" encoding="utf-8" consumer="db"/>
+    <iterate source="encounter.types.import.csv" type="encounterType" encoding="utf-8" consumer="db"/>
 
     <generate type="age" count="100" consumer="db">
-        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)" />
-        <attribute name="age" type="long" generator="new IncrementalIdGenerator(1)" />
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
+        <attribute name="age" type="long" generator="new IncrementalIdGenerator(1)"/>
     </generate>
 
+    <generate type="dateDimension" count="7300" consumer="db">
+        <attribute name="start_date" type="date" script="TimeUtil.today()" nullable="false"/>
+        <variable name="dateIncrement" type="int" generator="new IncrementalIdGenerator(0)" />
+        <attribute name="date" type="date" script="TimeUtil.addDays(this.start_date, dateIncrement)" nullable="false"/>
+        <attribute name="year" type="int" script="new LocalDate(this.date).getYear()" />
+        <attribute name="month" type="int" script="new LocalDate(this.date).getMonthOfYear()" />
+        <attribute name="day" type="int" script="new LocalDate(this.date).getDayOfMonth()" />
+        <attribute name="week" type="int" script="new LocalDate(this.date).getWeekOfWeekyear()" />
+    </generate>
 
     <generate type="patient" count="30" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
         <variable name="person" generator="PersonGenerator"/>
-        <attribute name="firstName" source="person.givenName" />
+        <attribute name="firstName" source="person.givenName"/>
         <attribute name="lastName" source="person.familyName"/>
         <attribute name="ageId" source="db" selector="select id from age" distribution="random"/>
-        <attribute name="genderId" source="db" selector="{{ftl:select id from gender where label = '${person.gender}'}}" cyclic="true"/>
+        <attribute name="genderId" source="db" selector="{{ftl:select id from gender where label = '${person.gender}'}}"
+                   cyclic="true"/>
         <attribute name="locationId" source="db" selector="select id from location" distribution="random"/>
     </generate>
 
