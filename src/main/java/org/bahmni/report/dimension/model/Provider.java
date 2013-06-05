@@ -7,13 +7,13 @@ public class Provider {
 
     private String id;
 
-    private ProviderType providerType;
+    private String name;
 
     public Provider() {
     }
 
-    public Provider(ProviderType providerType) {
-        this.providerType = providerType;
+    public Provider(String name) {
+        this.name = name;
     }
 
 }

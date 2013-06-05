@@ -31,8 +31,8 @@ public class ProviderMapperIT {
 
     @Test
     public void shouldGetAllProviders() {
-        Provider doctor = new Provider(ProviderType.Doctor);
-        Provider nurse = new Provider(ProviderType.Nurse);
+        Provider doctor = new Provider("Ram");
+        Provider nurse = new Provider("Shyam");
 
         providerMapper.insert(doctor);
         providerMapper.insert(nurse);
@@ -40,8 +40,8 @@ public class ProviderMapperIT {
         List<Provider> providers = providerMapper.getAll();
 
         assertEquals(2, providers.size());
-        assertEquals(ProviderType.Doctor, providers.get(0).getProviderType());
-        assertEquals(ProviderType.Nurse, providers.get(1).getProviderType());
+        assertEquals("Ram", providers.get(0).getName());
+        assertEquals("Shyam", providers.get(1).getName());
     }
 
 }

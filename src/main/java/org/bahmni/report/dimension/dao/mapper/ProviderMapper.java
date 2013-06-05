@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ProviderMapper {
 
-    @Insert("INSERT INTO provider(providerType) values (#{providerType})")
+    @Insert("INSERT INTO provider(name) values (#{name})")
     public void insert(Provider provider);
 
     @Select({"Select * from provider"})

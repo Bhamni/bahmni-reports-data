@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <setup>
-
     <import class="org.databene.commons.TimeUtil"/>
     <import class="org.joda.time.LocalDate"/>
-    <import domains="person, patient, age, datetime, location"/>
+    <import domains="person, patient, age, datetime, location, ageGroup, provider, appointment, appointmentType, disease, gender"/>
     <import platforms="db"/>
 
     <setting name="database" default="mysql"/>
@@ -16,6 +15,8 @@
     <iterate source="locations.import.csv" type="location" encoding="utf-8" consumer="db"/>
     <iterate source="appointment.types.import.csv" type="appointmentType" encoding="utf-8" consumer="db"/>
     <iterate source="encounter.types.import.csv" type="encounterType" encoding="utf-8" consumer="db"/>
+    <iterate source="disease.import.csv" type="disease" encoding="utf-8" consumer="db"/>
+    <iterate source="age.group.import.csv" type="ageGroup" encoding="utf-8" consumer="db"/>
 
     <generate type="age" count="100" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
@@ -32,6 +33,12 @@
         <attribute name="week" type="int" script="new LocalDate(this.date).getWeekOfWeekyear()" />
     </generate>
 
+    <generate type="provider" count="5" consumer="db">
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
+        <variable name="person" generator="PersonGenerator"/>
+        <attribute name="name" source="person.givenName"/>
+    </generate>
+
     <generate type="patient" count="30" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
         <variable name="person" generator="PersonGenerator"/>
@@ -41,6 +48,17 @@
         <attribute name="genderId" source="db" selector="{{ftl:select id from gender where label = '${person.gender}'}}"
                    cyclic="true"/>
         <attribute name="locationId" source="db" selector="select id from location" distribution="random"/>
+    </generate>
+
+    <generate type="appointment" count="10" consumer="db">
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
+        <attribute name="appointmentTypeId" source="db" selector="select id from appointmentType" distribution="random" />
+        <attribute name="diseaseId" source="db" selector="select id from disease" distribution="random" />
+        <attribute name="patientGenderId" source="db" selector="select id from gender" distribution="random" />
+        <attribute name="providerId" source="db" selector="select id from provider" distribution="random" />
+        <attribute name="ageId" source="db" selector="select id from age" distribution="random" />
+        <attribute name="ageGroupId" source="db" selector="select id from ageGroup" distribution="random" />
+        <attribute name="appointmentDateId" source="db" selector="select id from dateDimension" distribution="random" />
     </generate>
 
 

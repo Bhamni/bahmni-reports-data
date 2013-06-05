@@ -52,7 +52,7 @@ CREATE TABLE encounterType
 CREATE TABLE provider
 (
     id serial NOT NULL,
-    providerType varchar(160) NOT NULL,
+    name varchar(160) NOT NULL,
     PRIMARY KEY (id)
 );
 
