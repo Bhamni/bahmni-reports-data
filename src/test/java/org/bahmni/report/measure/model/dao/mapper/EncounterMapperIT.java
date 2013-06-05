@@ -26,8 +26,8 @@ public class EncounterMapperIT {
 
     @Test
     public void shouldGetAllEncounters() {
-        Encounter encounter1 = new Encounter(AppointmentType.Consultation,"diseaseID1");
-        Encounter encounter2 = new Encounter(AppointmentType.Surgery,"diseaseID2");
+        Encounter encounter1 = new Encounter(EncounterType.Consultation,"diseaseID1");
+        Encounter encounter2 = new Encounter(EncounterType.Surgery,"diseaseID2");
 
         encounterMapper.insert(encounter1);
         encounterMapper.insert(encounter2);
@@ -35,7 +35,7 @@ public class EncounterMapperIT {
         List<Encounter> encounters = encounterMapper.getAll();
 
         assertEquals(2, encounters.size());
-        assertEquals(AppointmentType.Consultation,encounters.get(0).getAppointmentType());
+        assertEquals(EncounterType.Consultation,encounters.get(0).getAppointmentType());
         assertEquals("diseaseID1",encounters.get(0).getDiseaseId()
         );
     }

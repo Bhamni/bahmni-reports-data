@@ -10,7 +10,8 @@ import java.util.List;
 @Repository
 public interface AppointmentMapper {
 
-    @Insert("INSERT INTO appointment(appointmentType, diseaseId) values (#{appointmentType}, #{diseaseId})")
+    @Insert("INSERT INTO appointment(appointmentType, diseaseId, appointmentDateId, patientGenderId, providerId, ageId, ageGroupId) " +
+            "values (#{appointmentType}, #{diseaseId}, #{appointmentDateId}, #{patientGenderId}, #{providerId}, #{ageId}, #{ageGroupId})")
     void insert(Appointment appointment);
 
     @Select({"Select * from appointment"})

@@ -11,6 +11,10 @@ public class Diagnosis {
 
     private String diseaseId;
 
+    private String patientGenderId;
+
+    private String ageId;
+
     private String ageGroupId;
 
     private String locationId;
@@ -22,9 +26,11 @@ public class Diagnosis {
     public Diagnosis() {
     }
 
-    public Diagnosis(String patientId, String diseaseId, String ageGroupId, String locationId, DiagnosisStatus diagnosisStatus, DiagnosisType diagnosisType) {
+    public Diagnosis(String patientId, String diseaseId, String patientGenderId, String ageId, String ageGroupId, String locationId, DiagnosisStatus diagnosisStatus, DiagnosisType diagnosisType) {
         this.patientId = patientId;
         this.diseaseId = diseaseId;
+        this.patientGenderId = patientGenderId;
+        this.ageId = ageId;
         this.ageGroupId = ageGroupId;
         this.locationId = locationId;
         this.diagnosisStatus = diagnosisStatus;

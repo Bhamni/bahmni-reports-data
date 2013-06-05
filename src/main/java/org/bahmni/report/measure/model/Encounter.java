@@ -8,16 +8,15 @@ public class Encounter {
 
     private String id;
 
-    private AppointmentType appointmentType;
+    private EncounterType appointmentType;
 
     private String diseaseId;
 
     public Encounter() {
     }
 
-    public Encounter(AppointmentType appointmentType, String diseaseId) {
-
-        this.appointmentType = appointmentType;
+    public Encounter(EncounterType encounterType, String diseaseId) {
+        this.appointmentType = encounterType;
         this.diseaseId = diseaseId;
     }
 }

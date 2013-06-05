@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface DiagnosisMapper {
 
-    @Insert("INSERT INTO diagnosis(patientId, diseaseId, ageGroupId, locationId, diagnosisStatus, diagnosisType) values (#{patientId}, #{diseaseId}, #{ageGroupId}, #{locationId}, #{diagnosisStatus}, #{diagnosisType})")
+    @Insert("INSERT INTO diagnosis(patientId, diseaseId, patientGenderId, ageId, ageGroupId, locationId, diagnosisStatus, diagnosisType) " +
+            "values (#{patientId}, #{diseaseId}, #{patientGenderId}, #{ageId}, #{ageGroupId}, #{locationId}, #{diagnosisStatus}, #{diagnosisType})")
     void insert(Diagnosis diagnosis);
 
     @Select({"Select * from diagnosis"})

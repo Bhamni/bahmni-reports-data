@@ -37,7 +37,7 @@ public class AppointmentMapperIT {
         diseaseMapper.insert(new Disease("Fever"));
         Disease fever = diseaseMapper.getAll().get(0);
 
-        Appointment appointment = new Appointment(AppointmentType.Surgery, fever.getId());
+        Appointment appointment = new Appointment(AppointmentType.Surgery, fever.getId(), "aptDateId", "genderId", "providerId", "ageId", "ageGroupId");
 
         appointmentMapper.insert(appointment);
 
@@ -46,6 +46,11 @@ public class AppointmentMapperIT {
         assertEquals(1, appointments.size());
         assertEquals(AppointmentType.Surgery, appointments.get(0).getAppointmentType());
         assertEquals(fever.getId(), appointments.get(0).getDiseaseId());
+        assertEquals("aptDateId", appointments.get(0).getAppointmentDateId());
+        assertEquals("genderId", appointments.get(0).getPatientGenderId());
+        assertEquals("providerId", appointments.get(0).getProviderId());
+        assertEquals("ageId", appointments.get(0).getAgeId());
+        assertEquals("ageGroupId", appointments.get(0).getAgeGroupId());
     }
 
 }

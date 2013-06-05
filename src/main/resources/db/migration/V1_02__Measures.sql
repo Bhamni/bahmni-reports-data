@@ -3,6 +3,11 @@ CREATE TABLE appointment
     id serial NOT NULL,
     appointmentType varchar(160) NOT NULL,
     diseaseId varchar(10) NOT NULL,
+    appointmentDateId varchar(10) NOT NULL,
+    patientGenderId varchar(10) NOT NULL,
+    providerId varchar(10) NOT NULL,
+    ageId varchar(10) NOT NULL,
+    ageGroupId varchar(10) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -22,6 +27,8 @@ CREATE TABLE diagnosis
     id serial NOT NULL,
     patientId varchar(160) NOT NULL,
     diseaseId varchar(160) NOT NULL,
+    patientGenderId varchar(10) NOT NULL,
+    ageId varchar(10) NOT NULL,
     ageGroupId varchar(10) NOT NULL,
     locationId varchar(10) NOT NULL,
     diagnosisStatus varchar(160) NOT NULL,
