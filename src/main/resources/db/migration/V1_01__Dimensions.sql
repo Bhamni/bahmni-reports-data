@@ -35,6 +35,20 @@ CREATE TABLE ageGroup
     PRIMARY KEY (id)
 );
 
+CREATE TABLE appointmentType
+(
+    id serial NOT NULL,
+    type varchar(160) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE encounterType
+(
+    id serial NOT NULL,
+    type varchar(160) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE provider
 (
     id serial NOT NULL,

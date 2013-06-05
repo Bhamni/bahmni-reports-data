@@ -4,7 +4,7 @@ package org.bahmni.report.measure.model.dao.mapper;
 import org.bahmni.report.dimension.dao.mapper.DiseaseMapper;
 import org.bahmni.report.dimension.model.Disease;
 import org.bahmni.report.measure.model.Appointment;
-import org.bahmni.report.measure.model.AppointmentType;
+import org.bahmni.report.dimension.model.AppointmentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +37,14 @@ public class AppointmentMapperIT {
         diseaseMapper.insert(new Disease("Fever"));
         Disease fever = diseaseMapper.getAll().get(0);
 
-        Appointment appointment = new Appointment(AppointmentType.Surgery, fever.getId(), "aptDateId", "genderId", "providerId", "ageId", "ageGroupId");
+        Appointment appointment = new Appointment("aptTypeId", fever.getId(), "aptDateId", "genderId", "providerId", "ageId", "ageGroupId");
 
         appointmentMapper.insert(appointment);
 
         List<Appointment> appointments = appointmentMapper.getAll();
 
         assertEquals(1, appointments.size());
-        assertEquals(AppointmentType.Surgery, appointments.get(0).getAppointmentType());
+        assertEquals("aptTypeId", appointments.get(0).getAppointmentTypeId());
         assertEquals(fever.getId(), appointments.get(0).getDiseaseId());
         assertEquals("aptDateId", appointments.get(0).getAppointmentDateId());
         assertEquals("genderId", appointments.get(0).getPatientGenderId());

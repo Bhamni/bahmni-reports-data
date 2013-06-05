@@ -1,13 +1,14 @@
 package org.bahmni.report.measure.model;
 
 import lombok.Data;
+import org.bahmni.report.dimension.model.AppointmentType;
 
 @Data
 public class Appointment {
 
     private String id;
 
-    private AppointmentType appointmentType;
+    private String appointmentTypeId;
 
     private String diseaseId;
 
@@ -24,8 +25,8 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(AppointmentType appointmentType, String diseaseId, String appointmentDateId, String patientGenderId, String providerId, String ageId, String ageGroupId) {
-        this.appointmentType = appointmentType;
+    public Appointment(String appointmentTypeId, String diseaseId, String appointmentDateId, String patientGenderId, String providerId, String ageId, String ageGroupId) {
+        this.appointmentTypeId = appointmentTypeId;
         this.diseaseId = diseaseId;
         this.appointmentDateId = appointmentDateId;
         this.patientGenderId = patientGenderId;

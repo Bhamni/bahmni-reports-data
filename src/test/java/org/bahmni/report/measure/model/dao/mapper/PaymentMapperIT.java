@@ -1,9 +1,5 @@
 package org.bahmni.report.measure.model.dao.mapper;
 
-import org.bahmni.report.dimension.dao.mapper.DiseaseMapper;
-import org.bahmni.report.dimension.model.Disease;
-import org.bahmni.report.measure.model.Appointment;
-import org.bahmni.report.measure.model.AppointmentType;
 import org.bahmni.report.measure.model.Payment;
 import org.junit.Test;
 import org.junit.runner.RunWith;

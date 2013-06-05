@@ -1,7 +1,7 @@
 CREATE TABLE appointment
 (
     id serial NOT NULL,
-    appointmentType varchar(160) NOT NULL,
+    appointmentTypeId varchar(10) NOT NULL,
     diseaseId varchar(10) NOT NULL,
     appointmentDateId varchar(10) NOT NULL,
     patientGenderId varchar(10) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE referral
 CREATE TABLE encounter
 (
     id serial NOT NULL,
-    appointmentType varchar(160) NOT NULL,
+    encounterTypeId varchar(10) NOT NULL,
     diseaseId varchar(10) NOT NULL,
     PRIMARY KEY (id)
 );

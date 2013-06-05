@@ -12,6 +12,8 @@
 
     <iterate source="genders.import.csv" type="gender" encoding="utf-8" consumer="db" />
     <iterate source="locations.import.csv" type="location" encoding="utf-8" consumer="db" />
+    <iterate source="appointment.types.import.csv" type="appointmentType" encoding="utf-8" consumer="db" />
+    <iterate source="encounter.types.import.csv" type="encounterType" encoding="utf-8" consumer="db" />
 
     <generate type="age" count="100" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)" />
