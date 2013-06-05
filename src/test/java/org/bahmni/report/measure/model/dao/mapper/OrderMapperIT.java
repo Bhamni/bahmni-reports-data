@@ -3,6 +3,7 @@ package org.bahmni.report.measure.model.dao.mapper;
 
 import org.bahmni.report.measure.model.Observation;
 import org.bahmni.report.measure.model.Order;
+import org.bahmni.report.measure.model.OrderType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,17 @@ public class OrderMapperIT {
 
     @Test
     public void shouldGetAllOrders() {
-        Order order = new Order("syringes", "glaxo");
+        Order order = new Order(OrderType.DrugOrder, "crocin - 10 strips", "Foo", "startDateId", "expDateId");
         orderMapper.insert(order);
 
         List<Order> orders = orderMapper.getAll();
 
         assertEquals(1, orders.size());
-        assertEquals("syringes", orders.get(0).getType());
-        assertEquals("glaxo", orders.get(0).getName());
+        assertEquals(OrderType.DrugOrder, orders.get(0).getType());
+        assertEquals("crocin - 10 strips", orders.get(0).getInstructions());
+        assertEquals("Foo", orders.get(0).getOrderer());
+        assertEquals("startDateId", orders.get(0).getStartDateId());
+        assertEquals("expDateId", orders.get(0).getAutoExpireDateId());
     }
 
 }

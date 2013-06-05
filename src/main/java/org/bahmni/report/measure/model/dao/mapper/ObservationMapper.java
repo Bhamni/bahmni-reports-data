@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface ObservationMapper {
 
-    @Insert("INSERT INTO observation(name, value, unit, comment) values (#{name}, #{value}, #{unit}, #{comment})")
+    @Insert("INSERT INTO observation(name, value, unit, comment, locationId, observationDateId)" +
+            " values (#{name}, #{value}, #{unit}, #{comment}, #{locationId}, #{observationDateId})")
     void insert(Observation observation);
 
     @Select({"Select * from observation"})

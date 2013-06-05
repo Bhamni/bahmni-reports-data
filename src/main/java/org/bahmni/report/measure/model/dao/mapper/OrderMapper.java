@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
-    @Insert("INSERT INTO orderMeasure(name, type) values (#{name}, #{type})")
+    @Insert("INSERT INTO orderMeasure(type, instructions, orderer, startDateId, autoExpireDateId) " +
+            "values (#{type}, #{instructions}, #{orderer}, #{startDateId}, #{autoExpireDateId})")
     void insert(Order order);
 
     @Select({"Select * from orderMeasure"})

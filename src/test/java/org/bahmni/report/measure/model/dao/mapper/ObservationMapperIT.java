@@ -28,7 +28,7 @@ public class ObservationMapperIT {
 
     @Test
     public void shouldGetAllDiagnosis() {
-        Observation observation = new Observation("temperature", "39", "celsius", "high fever");
+        Observation observation = new Observation("temperature", "39", "celsius", "high fever", "locId", "obsDateId");
         observationMapper.insert(observation);
 
         List<Observation> observations = observationMapper.getAll();
@@ -38,6 +38,8 @@ public class ObservationMapperIT {
         assertEquals("39", observations.get(0).getValue());
         assertEquals("celsius", observations.get(0).getUnit());
         assertEquals("high fever", observations.get(0).getComment());
+        assertEquals("locId", observations.get(0).getLocationId());
+        assertEquals("obsDateId", observations.get(0).getObservationDateId());
     }
 
 }

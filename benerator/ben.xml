@@ -61,5 +61,36 @@
         <attribute name="appointmentDateId" source="db" selector="select id from dateDimension" distribution="random" />
     </generate>
 
+    <generate type="diagnosis" count="10" consumer="db">
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
+        <attribute name="patientId" source="db" selector="select id from patient" distribution="random" />
+        <attribute name="diseaseId" source="db" selector="select id from disease" distribution="random" />
+        <attribute name="patientGenderId" source="db" selector="select id from gender" distribution="random" />
+        <attribute name="ageId" source="db" selector="select id from age" distribution="random" />
+        <attribute name="ageGroupId" source="db" selector="select id from ageGroup" distribution="random" />
+        <attribute name="locationId" source="db" selector="select id from location" distribution="random" />
+        <attribute name="diagnosisStatus" type="string" values="'Found', 'Treated'" />
+        <attribute name="diagnosisType" type="string" values="'Primary', 'Differential'" />
+    </generate>
+
+    <generate type="observation" count="10" consumer="db">
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
+        <variable name="person" generator="PersonGenerator"/>
+        <attribute name="name" source="person.givenName"/>
+        <attribute name="value" type="string" values="'17','18','19','20'"/>
+        <attribute name="unit" type="string" values="'C'"/>
+        <attribute name="locationId" source="db" selector="select id from location" distribution="random" />
+        <attribute name="observationDateId" source="db" selector="select id from dateDimension" distribution="random" />
+    </generate>
+
+    <generate type="orderMeasure" count="10" consumer="db">
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
+        <variable name="person" generator="PersonGenerator"/>
+        <attribute name="type" type="string" values="'DrugOrder'" />
+        <attribute name="orderer" source="person.givenName"/>
+        <attribute name="startDateId" source="db" selector="select id from dateDimension" distribution="random" />
+        <attribute name="autoExpireDateId" source="db" selector="select id from dateDimension" distribution="random" />
+    </generate>
+
 
 </setup>

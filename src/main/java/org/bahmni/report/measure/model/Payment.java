@@ -13,10 +13,10 @@ public class Payment {
 
     private float discount;
 
-    public Payment(){
+    public Payment() {
     }
 
-    public Payment(boolean paid,float amount,float discount){
+    public Payment(boolean paid, float amount, float discount) {
 
         this.paid = paid;
         this.amount = amount;
