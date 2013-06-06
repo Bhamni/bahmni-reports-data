@@ -10,11 +10,11 @@ import java.util.List;
 @Repository
 public interface AppointmentMapper {
 
-    @Insert("INSERT INTO appointment(appointmentTypeId, diseaseId, appointmentDateId, patientGenderId, providerId, ageId, ageGroupId) " +
+    @Insert("INSERT INTO bahmnireportsdata.appointment(appointmentTypeId, diseaseId, appointmentDateId, patientGenderId, providerId, ageId, ageGroupId) " +
             "values (#{appointmentTypeId}, #{diseaseId}, #{appointmentDateId}, #{patientGenderId}, #{providerId}, #{ageId}, #{ageGroupId})")
     void insert(Appointment appointment);
 
-    @Select({"Select * from appointment"})
+    @Select({"Select * from bahmnireportsdata.appointment"})
     public List<Appointment> getAll();
 
 }

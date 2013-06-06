@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AppointmentType {
 
-    private String id;
+    private Long id;
 
     private String type;
 

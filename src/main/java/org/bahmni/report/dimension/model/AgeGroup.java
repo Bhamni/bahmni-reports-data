@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AgeGroup {
 
-    private String id;
+    private Long id;
 
     private Integer minAge;
 

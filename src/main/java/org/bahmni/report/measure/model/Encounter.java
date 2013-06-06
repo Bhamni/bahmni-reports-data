@@ -7,16 +7,16 @@ import org.bahmni.report.dimension.model.EncounterType;
 @Data
 public class Encounter {
 
-    private String id;
+    private Long id;
 
-    private String diseaseId;
+    private Long diseaseId;
 
-    private String encounterTypeId;
+    private Long encounterTypeId;
 
     public Encounter() {
     }
 
-    public Encounter(String encounterTypeId, String diseaseId) {
+    public Encounter(Long encounterTypeId, Long diseaseId) {
         this.encounterTypeId = encounterTypeId;
         this.diseaseId = diseaseId;
     }

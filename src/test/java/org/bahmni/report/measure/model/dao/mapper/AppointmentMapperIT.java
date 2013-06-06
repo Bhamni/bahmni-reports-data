@@ -1,10 +1,10 @@
 package org.bahmni.report.measure.model.dao.mapper;
 
 
-import org.bahmni.report.dimension.dao.mapper.DiseaseMapper;
-import org.bahmni.report.dimension.model.Disease;
+import org.bahmni.report.dimension.dao.mapper.*;
+import org.bahmni.report.dimension.model.*;
 import org.bahmni.report.measure.model.Appointment;
-import org.bahmni.report.dimension.model.AppointmentType;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,32 +25,55 @@ public class AppointmentMapperIT {
 
     @Autowired
     public DiseaseMapper diseaseMapper;
+    @Autowired
+    public AppointmentTypeMapper appointmentTypeMapper;
+    @Autowired
+    public DateDimensionMapper dateDimensionMapper;
+    @Autowired
+    public GenderMapper genderMapper;
+    @Autowired
+    public ProviderMapper providerMapper;
+    @Autowired
+    public AgeMapper ageMapper;
+    @Autowired
+    public AgeGroupMapper ageGroupMapper;
 
     @Autowired
     public AppointmentMapper appointmentMapper;
 
-    public AppointmentMapperIT() {
-    }
 
     @Test
     public void shouldGetAllAppointments() {
-        diseaseMapper.insert(new Disease("Fever"));
-        Disease fever = diseaseMapper.getAll().get(0);
 
-        Appointment appointment = new Appointment("aptTypeId", fever.getId(), "aptDateId", "genderId", "providerId", "ageId", "ageGroupId");
+        diseaseMapper.insert(new Disease("Fever"));
+        Disease disease = diseaseMapper.getAll().get(0);
+        appointmentTypeMapper.insert(new AppointmentType("Follow-Up"));
+        AppointmentType appointmentType = appointmentTypeMapper.getAll().get(0);
+        dateDimensionMapper.insert(new DateDimension(LocalDate.now().toDate()));
+        DateDimension today = dateDimensionMapper.getAll().get(0);
+        genderMapper.insert(new Gender("Female"));
+        Gender gender = genderMapper.getAll().get(0);
+        providerMapper.insert(new Provider("Harikesh"));
+        Provider provider = providerMapper.getAll().get(0);
+        ageMapper.insert(new Age(60));
+        Age age = ageMapper.getAll().get(0);
+        ageGroupMapper.insert(new AgeGroup(50, 70));
+        AgeGroup ageGroup = ageGroupMapper.getAll().get(0);
+
+        Appointment appointment = new Appointment(appointmentType.getId(), disease.getId(), today.getId(), gender.getId(), provider.getId(), age.getId(), ageGroup.getId());
 
         appointmentMapper.insert(appointment);
 
         List<Appointment> appointments = appointmentMapper.getAll();
 
         assertEquals(1, appointments.size());
-        assertEquals("aptTypeId", appointments.get(0).getAppointmentTypeId());
-        assertEquals(fever.getId(), appointments.get(0).getDiseaseId());
-        assertEquals("aptDateId", appointments.get(0).getAppointmentDateId());
-        assertEquals("genderId", appointments.get(0).getPatientGenderId());
-        assertEquals("providerId", appointments.get(0).getProviderId());
-        assertEquals("ageId", appointments.get(0).getAgeId());
-        assertEquals("ageGroupId", appointments.get(0).getAgeGroupId());
+        assertEquals(appointmentType.getId(), appointments.get(0).getAppointmentTypeId());
+        assertEquals(disease.getId(), appointments.get(0).getDiseaseId());
+        assertEquals(today.getId(), appointments.get(0).getAppointmentDateId());
+        assertEquals(gender.getId(), appointments.get(0).getPatientGenderId());
+        assertEquals(provider.getId(), appointments.get(0).getProviderId());
+        assertEquals(age.getId(), appointments.get(0).getAgeId());
+        assertEquals(ageGroup.getId(), appointments.get(0).getAgeGroupId());
     }
 
 }

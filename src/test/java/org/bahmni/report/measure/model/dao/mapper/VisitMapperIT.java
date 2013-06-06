@@ -18,6 +18,7 @@ import static junit.framework.Assert.assertEquals;
 @Transactional
 @TransactionConfiguration(defaultRollback = true)
 public class VisitMapperIT {
+
     @Autowired
     public VisitMapper visitMapper;
 

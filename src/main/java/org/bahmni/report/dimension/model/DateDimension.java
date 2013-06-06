@@ -9,7 +9,7 @@ import java.sql.Date;
 @Data
 public class DateDimension {
 
-    private String id;
+    private Long id;
 
     private Date date;
 

@@ -5,16 +5,16 @@ import lombok.Data;
 @Data
 public class Referral {
 
-    private String id;
+    private Long id;
 
     private ReferralType referralType;
 
-    private String providerId;
+    private Long providerId;
 
     public Referral() {
     }
 
-    public Referral(ReferralType referralType, String providerId) {
+    public Referral(ReferralType referralType, Long providerId) {
         this.referralType = referralType;
         this.providerId = providerId;
     }

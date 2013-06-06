@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface AgeGroupMapper {
 
-    @Insert("INSERT INTO ageGroup(minAge, maxAge) values (#{minAge}, #{maxAge})")
+    @Insert("INSERT INTO bahmnireportsdata.ageGroup(minAge, maxAge) values (#{minAge}, #{maxAge})")
     void insert(AgeGroup ageGroup);
 
-    @Select({"Select * from ageGroup"})
+    @Select({"Select * from bahmnireportsdata.ageGroup"})
     public List<AgeGroup> getAll();
 }

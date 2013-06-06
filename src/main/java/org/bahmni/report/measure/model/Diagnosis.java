@@ -7,17 +7,17 @@ public class Diagnosis {
 
     private String id;
 
-    private String patientId;
+    private Long patientId;
 
-    private String diseaseId;
+    private Long diseaseId;
 
-    private String patientGenderId;
+    private Long patientGenderId;
 
-    private String ageId;
+    private Long ageId;
 
-    private String ageGroupId;
+    private Long ageGroupId;
 
-    private String locationId;
+    private Long locationId;
 
     private DiagnosisStatus diagnosisStatus;
 
@@ -26,7 +26,7 @@ public class Diagnosis {
     public Diagnosis() {
     }
 
-    public Diagnosis(String patientId, String diseaseId, String patientGenderId, String ageId, String ageGroupId, String locationId, DiagnosisStatus diagnosisStatus, DiagnosisType diagnosisType) {
+    public Diagnosis(Long patientId, Long diseaseId, Long patientGenderId, Long ageId, Long ageGroupId, Long locationId, DiagnosisStatus diagnosisStatus, DiagnosisType diagnosisType) {
         this.patientId = patientId;
         this.diseaseId = diseaseId;
         this.patientGenderId = patientGenderId;

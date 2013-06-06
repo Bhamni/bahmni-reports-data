@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface EncounterMapper {
-    @Insert("INSERT INTO encounter(encounterTypeId, diseaseId) values (#{encounterTypeId}, #{diseaseId})")
+    @Insert("INSERT INTO bahmnireportsdata.encounter(encounterTypeId, diseaseId) values (#{encounterTypeId}, #{diseaseId})")
     void insert(Encounter encounter);
 
-    @Select({"Select * from encounter"})
+    @Select({"Select * from bahmnireportsdata.encounter"})
     public List<Encounter> getAll();
 }

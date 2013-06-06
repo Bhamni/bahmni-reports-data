@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface DiseaseMapper {
 
-    @Insert("INSERT INTO disease(name) values (#{name})")
+    @Insert("INSERT INTO bahmnireportsdata.disease(name) values (#{name})")
     void insert(Disease disease);
 
-    @Select({"Select * from disease"})
+    @Select({"Select * from bahmnireportsdata.disease"})
     public List<Disease> getAll();
 
 }

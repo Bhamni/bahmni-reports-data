@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Visit {
 
-    private String id;
+    private Long id;
 
     private VisitType visitType;
 
@@ -15,8 +15,8 @@ public class Visit {
     }
 
     public Visit(VisitType visitType, AdmissionStatus admissionStatus) {
-
         this.visitType = visitType;
         this.admissionStatus = admissionStatus;
     }
+
 }

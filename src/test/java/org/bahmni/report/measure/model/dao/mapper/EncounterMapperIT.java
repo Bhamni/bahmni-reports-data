@@ -1,5 +1,10 @@
 package org.bahmni.report.measure.model.dao.mapper;
 
+import org.bahmni.report.dimension.dao.mapper.DiseaseMapper;
+import org.bahmni.report.dimension.dao.mapper.EncounterTypeMapper;
+import org.bahmni.report.dimension.model.AppointmentType;
+import org.bahmni.report.dimension.model.Disease;
+import org.bahmni.report.dimension.model.EncounterType;
 import org.bahmni.report.measure.model.Encounter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +26,11 @@ import static junit.framework.Assert.assertEquals;
 public class EncounterMapperIT {
 
     @Autowired
+    public EncounterTypeMapper encounterTypeMapper;
+    @Autowired
+    public DiseaseMapper diseaseMapper;
+
+    @Autowired
     public EncounterMapper encounterMapper;
 
     public EncounterMapperIT() {
@@ -28,18 +38,18 @@ public class EncounterMapperIT {
 
     @Test
     public void shouldGetAllEncounters() {
-        Encounter encounter1 = new Encounter("encTypeID1", "diseaseID1");
-        Encounter encounter2 = new Encounter("encTypeID2", "diseaseID2");
+        encounterTypeMapper.insert(new EncounterType("Follow-Up"));
+        EncounterType encounterType = encounterTypeMapper.getAll().get(0);
+        diseaseMapper.insert(new Disease("Dengue"));
+        Disease disease = diseaseMapper.getAll().get(0);
 
-        encounterMapper.insert(encounter1);
-        encounterMapper.insert(encounter2);
-
+        Encounter encounter = new Encounter(encounterType.getId(), disease.getId());
+        encounterMapper.insert(encounter);
         List<Encounter> encounters = encounterMapper.getAll();
 
-        assertEquals(2, encounters.size());
-        assertEquals("encTypeID1", encounters.get(0).getEncounterTypeId());
-        assertEquals("diseaseID1", encounters.get(0).getDiseaseId()
-        );
+        assertEquals(1, encounters.size());
+        assertEquals(encounterType.getId(), encounters.get(0).getEncounterTypeId());
+        assertEquals(disease.getId(), encounters.get(0).getDiseaseId());
     }
 
 }

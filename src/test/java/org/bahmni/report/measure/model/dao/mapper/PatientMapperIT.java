@@ -1,8 +1,11 @@
 package org.bahmni.report.measure.model.dao.mapper;
 
 
-import org.bahmni.report.dimension.model.AgeGroup;
-import org.bahmni.report.measure.model.Appointment;
+import org.bahmni.report.dimension.dao.mapper.*;
+import org.bahmni.report.dimension.model.Age;
+import org.bahmni.report.dimension.model.Gender;
+import org.bahmni.report.dimension.model.Level;
+import org.bahmni.report.dimension.model.Location;
 import org.bahmni.report.measure.model.Patient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +27,13 @@ import static junit.framework.Assert.assertEquals;
 public class PatientMapperIT {
 
     @Autowired
+    public GenderMapper genderMapper;
+    @Autowired
+    public AgeMapper ageMapper;
+    @Autowired
+    public LocationMapper locationMapper;
+
+    @Autowired
     public PatientMapper patientMapper;
 
     public PatientMapperIT() {
@@ -31,20 +41,24 @@ public class PatientMapperIT {
 
     @Test
     public void shouldGetAllPatients() {
-        Patient patient1 = new Patient("Ram", "Singh", "ageId1", "gId1", "locId1");
-        Patient patient2 = new Patient("Meera", "Yadav", "ageId2", "gId2", "locId2");
 
-        patientMapper.insert(patient1);
-        patientMapper.insert(patient2);
+        genderMapper.insert(new Gender("Female"));
+        Gender gender = genderMapper.getAll().get(0);
+        ageMapper.insert(new Age(60));
+        Age age = ageMapper.getAll().get(0);
+        locationMapper.insert(new Location("Karnataka", Level.State));
+        Location location = locationMapper.getAll().get(0);
 
+        Patient patient = new Patient("Ram", "Singh", age.getId(), gender.getId(), location.getId());
+        patientMapper.insert(patient);
         List<Patient> patients = patientMapper.getAll();
 
-        assertEquals(2, patients.size());
+        assertEquals(1, patients.size());
         assertEquals("Ram", patients.get(0).getFirstName());
         assertEquals("Singh", patients.get(0).getLastName());
-        assertEquals("ageId1", patients.get(0).getAgeId());
-        assertEquals("gId1", patients.get(0).getGenderId());
-        assertEquals("locId1", patients.get(0).getLocationId());
+        assertEquals(age.getId(), patients.get(0).getAgeId());
+        assertEquals(gender.getId(), patients.get(0).getGenderId());
+        assertEquals(location.getId(), patients.get(0).getLocationId());
 
     }
 

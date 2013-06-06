@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface AgeMapper {
-    @Insert("INSERT INTO age(age) values (#{age})")
+    @Insert("INSERT INTO bahmnireportsdata.age(age) values (#{age})")
     void insert(Age age);
 
-    @Select({"Select * from age"})
+    @Select({"Select * from bahmnireportsdata.age"})
     public List<Age> getAll();
 }

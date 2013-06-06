@@ -5,7 +5,7 @@
     <import domains="person, patient, age, datetime, location, ageGroup, provider, appointment, appointmentType, disease, gender"/>
     <import platforms="db"/>
 
-    <setting name="database" default="mysql"/>
+    <setting name="database" default="postgres"/>
     <setting name="dbCatalog" default="bahmnireportsdata"/>
 
     <database id="db" url="{dbUrl}" driver="{dbDriver}" schema="{dbSchema}"
@@ -24,13 +24,14 @@
     </generate>
 
     <generate type="dateDimension" count="7300" consumer="db">
+        <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
         <attribute name="start_date" type="date" script="TimeUtil.today()" nullable="false"/>
-        <variable name="dateIncrement" type="int" generator="new IncrementalIdGenerator(0)" />
+        <variable name="dateIncrement" type="int" generator="new IncrementalIdGenerator(0)"/>
         <attribute name="date" type="date" script="TimeUtil.addDays(this.start_date, dateIncrement)" nullable="false"/>
-        <attribute name="year" type="int" script="new LocalDate(this.date).getYear()" />
-        <attribute name="month" type="int" script="new LocalDate(this.date).getMonthOfYear()" />
-        <attribute name="day" type="int" script="new LocalDate(this.date).getDayOfMonth()" />
-        <attribute name="week" type="int" script="new LocalDate(this.date).getWeekOfWeekyear()" />
+        <attribute name="year" type="int" script="new LocalDate(this.date).getYear()"/>
+        <attribute name="month" type="int" script="new LocalDate(this.date).getMonthOfYear()"/>
+        <attribute name="day" type="int" script="new LocalDate(this.date).getDayOfMonth()"/>
+        <attribute name="week" type="int" script="new LocalDate(this.date).getWeekOfWeekyear()"/>
     </generate>
 
     <generate type="provider" count="5" consumer="db">
@@ -44,33 +45,46 @@
         <variable name="person" generator="PersonGenerator"/>
         <attribute name="firstName" source="person.givenName"/>
         <attribute name="lastName" source="person.familyName"/>
-        <attribute name="ageId" source="db" selector="select id from age" distribution="random"/>
-        <attribute name="genderId" source="db" selector="{{ftl:select id from gender where label = '${person.gender}'}}"
+        <attribute name="ageId" source="db" selector="select id from bahmnireportsdata.age" distribution="random"/>
+        <attribute name="genderId" source="db"
+                   selector="{{ftl:select id from bahmnireportsdata.gender where label = '${person.gender}'}}"
                    cyclic="true"/>
-        <attribute name="locationId" source="db" selector="select id from location" distribution="random"/>
+        <attribute name="locationId" source="db" selector="select id from bahmnireportsdata.location"
+                   distribution="random"/>
     </generate>
 
     <generate type="appointment" count="10" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
-        <attribute name="appointmentTypeId" source="db" selector="select id from appointmentType" distribution="random" />
-        <attribute name="diseaseId" source="db" selector="select id from disease" distribution="random" />
-        <attribute name="patientGenderId" source="db" selector="select id from gender" distribution="random" />
-        <attribute name="providerId" source="db" selector="select id from provider" distribution="random" />
-        <attribute name="ageId" source="db" selector="select id from age" distribution="random" />
-        <attribute name="ageGroupId" source="db" selector="select id from ageGroup" distribution="random" />
-        <attribute name="appointmentDateId" source="db" selector="select id from dateDimension" distribution="random" />
+        <attribute name="appointmentTypeId" source="db" selector="select id from bahmnireportsdata.appointmentType"
+                   distribution="random"/>
+        <attribute name="diseaseId" source="db" selector="select id from bahmnireportsdata.disease"
+                   distribution="random"/>
+        <attribute name="patientGenderId" source="db" selector="select id from bahmnireportsdata.gender"
+                   distribution="random"/>
+        <attribute name="providerId" source="db" selector="select id from bahmnireportsdata.provider"
+                   distribution="random"/>
+        <attribute name="ageId" source="db" selector="select id from bahmnireportsdata.age" distribution="random"/>
+        <attribute name="ageGroupId" source="db" selector="select id from bahmnireportsdata.ageGroup"
+                   distribution="random"/>
+        <attribute name="appointmentDateId" source="db" selector="select id from bahmnireportsdata.dateDimension"
+                   distribution="random"/>
     </generate>
 
     <generate type="diagnosis" count="10" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
-        <attribute name="patientId" source="db" selector="select id from patient" distribution="random" />
-        <attribute name="diseaseId" source="db" selector="select id from disease" distribution="random" />
-        <attribute name="patientGenderId" source="db" selector="select id from gender" distribution="random" />
-        <attribute name="ageId" source="db" selector="select id from age" distribution="random" />
-        <attribute name="ageGroupId" source="db" selector="select id from ageGroup" distribution="random" />
-        <attribute name="locationId" source="db" selector="select id from location" distribution="random" />
-        <attribute name="diagnosisStatus" type="string" values="'Found', 'Treated'" />
-        <attribute name="diagnosisType" type="string" values="'Primary', 'Differential'" />
+        <attribute name="patientId" source="db" selector="select id from bahmnireportsdata.patient"
+                   distribution="random"/>
+        <attribute name="diseaseId" source="db" selector="select id from bahmnireportsdata.disease"
+                   distribution="random"/>
+        <attribute name="patientGenderId" source="db" selector="select id from bahmnireportsdata.gender"
+                   distribution="random"/>
+        <attribute name="ageId" source="db" selector="select id from bahmnireportsdata.age" distribution="random"/>
+        <attribute name="ageGroupId" source="db" selector="select id from bahmnireportsdata.ageGroup"
+                   distribution="random"/>
+        <attribute name="locationId" source="db" selector="select id from bahmnireportsdata.location"
+                   distribution="random"/>
+        <attribute name="diagnosisStatus" type="string" values="'Found', 'Treated'"/>
+        <attribute name="diagnosisType" type="string" values="'Primary', 'Differential'"/>
     </generate>
 
     <generate type="observation" count="10" consumer="db">
@@ -79,18 +93,21 @@
         <attribute name="name" source="person.givenName"/>
         <attribute name="value" type="string" values="'17','18','19','20'"/>
         <attribute name="unit" type="string" values="'C'"/>
-        <attribute name="locationId" source="db" selector="select id from location" distribution="random" />
-        <attribute name="observationDateId" source="db" selector="select id from dateDimension" distribution="random" />
+        <attribute name="locationId" source="db" selector="select id from bahmnireportsdata.location"
+                   distribution="random"/>
+        <attribute name="observationDateId" source="db" selector="select id from bahmnireportsdata.dateDimension"
+                   distribution="random"/>
     </generate>
 
     <generate type="orderMeasure" count="10" consumer="db">
         <id name="id" type="long" generator="new IncrementalIdGenerator(1000)"/>
         <variable name="person" generator="PersonGenerator"/>
-        <attribute name="type" type="string" values="'DrugOrder'" />
+        <attribute name="type" type="string" values="'DrugOrder'"/>
         <attribute name="orderer" source="person.givenName"/>
-        <attribute name="startDateId" source="db" selector="select id from dateDimension" distribution="random" />
-        <attribute name="autoExpireDateId" source="db" selector="select id from dateDimension" distribution="random" />
+        <attribute name="startDateId" source="db" selector="select id from bahmnireportsdata.dateDimension"
+                   distribution="random"/>
+        <attribute name="autoExpireDateId" source="db" selector="select id from bahmnireportsdata.dateDimension"
+                   distribution="random"/>
     </generate>
-
 
 </setup>

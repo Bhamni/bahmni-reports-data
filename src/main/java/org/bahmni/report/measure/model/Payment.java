@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Payment {
 
-    private String id;
+    private Long id;
 
     private boolean paid;
 

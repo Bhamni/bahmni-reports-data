@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface AppointmentTypeMapper {
-    @Insert("INSERT INTO appointmentType(type) values (#{type})")
+    @Insert("INSERT INTO bahmnireportsdata.appointmentType(type) values (#{type})")
     void insert(AppointmentType appointmentType);
 
-    @Select({"Select * from appointmentType"})
+    @Select({"Select * from bahmnireportsdata.appointmentType"})
     public List<AppointmentType> getAll();
 }

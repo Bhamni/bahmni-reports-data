@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface EncounterTypeMapper {
 
-    @Insert("INSERT INTO encounterType(type) values (#{type})")
+    @Insert("INSERT INTO bahmnireportsdata.encounterType(type) values (#{type})")
     void insert(EncounterType encounterType);
 
-    @Select({"Select * from encounterType"})
+    @Select({"Select * from bahmnireportsdata.encounterType"})
     public List<EncounterType> getAll();
 
 }

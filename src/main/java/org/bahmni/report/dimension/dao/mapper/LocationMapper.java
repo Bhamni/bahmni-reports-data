@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface LocationMapper {
 
-    @Insert("INSERT INTO location(name, level) values (#{name}, #{level})")
+    @Insert("INSERT INTO bahmnireportsdata.location(name, level) values (#{name}, #{level})")
     void insert(Location location);
 
-    @Select({"Select * from location"})
+    @Select({"Select * from bahmnireportsdata.location"})
     public List<Location> getAll();
 
 }

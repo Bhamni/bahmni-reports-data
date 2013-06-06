@@ -1,13 +1,13 @@
 CREATE TABLE appointment
 (
     id serial NOT NULL,
-    appointmentTypeId varchar(50) NOT NULL,
-    diseaseId varchar(50) NOT NULL,
-    appointmentDateId varchar(50) NOT NULL,
-    patientGenderId varchar(50) NOT NULL,
-    providerId varchar(50) NOT NULL,
-    ageId varchar(50) NOT NULL,
-    ageGroupId varchar(50) NOT NULL,
+    appointmentTypeId int NOT NULL references appointmentType(id),
+    diseaseId int NOT NULL references disease(id),
+    appointmentDateId int NOT NULL references dateDimension(id),
+    patientGenderId int NOT NULL references gender(id),
+    providerId int NOT NULL references provider(id),
+    ageId int NOT NULL references age(id),
+    ageGroupId int NOT NULL references ageGroup(id),
     PRIMARY KEY (id)
 );
 
@@ -16,21 +16,21 @@ CREATE TABLE patient
     id serial NOT NULL,
     firstName varchar(160) NOT NULL,
     lastName varchar(160) NOT NULL,
-    ageId varchar(50) NOT NULL,
-    genderId varchar(50) NOT NULL,
-    locationId varchar(50) NOT NULL,
+    ageId int NOT NULL references age(id),
+    genderId int NOT NULL references gender(id),
+    locationId int NOT NULL references location(id),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE diagnosis
 (
     id serial NOT NULL,
-    patientId varchar(160) NOT NULL,
-    diseaseId varchar(160) NOT NULL,
-    patientGenderId varchar(50) NOT NULL,
-    ageId varchar(50) NOT NULL,
-    ageGroupId varchar(50) NOT NULL,
-    locationId varchar(50) NOT NULL,
+    patientId int NOT NULL references patient(id),
+    diseaseId int NOT NULL references disease(id),
+    patientGenderId int NOT NULL references gender(id),
+    ageId int NOT NULL references age(id),
+    ageGroupId int NOT NULL references ageGroup(id),
+    locationId int NOT NULL references location(id),
     diagnosisStatus varchar(160) NOT NULL,
     diagnosisType varchar(160) NOT NULL,
     PRIMARY KEY (id)
@@ -43,8 +43,8 @@ CREATE TABLE observation
     value varchar(160) NOT NULL,
     unit varchar(160) NOT NULL,
     comment varchar(160) NOT NULL,
-    locationId varchar(50) NOT NULL,
-    observationDateId varchar(50) NOT NULL,
+    locationId int NOT NULL references location(id),
+    observationDateId int NOT NULL references dateDimension(id),
     PRIMARY KEY (id)
 );
 
@@ -54,8 +54,8 @@ CREATE TABLE orderMeasure
     type varchar(160) NOT NULL,
     instructions varchar(160) NOT NULL,
     orderer varchar(160) NOT NULL,
-    startDateId varchar(50) NOT NULL,
-    autoExpireDateId varchar(50) NOT NULL,
+    startDateId int NOT NULL references dateDimension(id),
+    autoExpireDateId int NOT NULL references dateDimension(id),
     PRIMARY KEY (id)
 );
 
@@ -63,15 +63,15 @@ CREATE TABLE referral
 (
     id serial NOT NULL,
     referralType varchar(160) NOT NULL,
-    providerId varchar(50) NOT NULL,
+    providerId int NOT NULL references provider(id),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE encounter
 (
     id serial NOT NULL,
-    encounterTypeId varchar(50) NOT NULL,
-    diseaseId varchar(50) NOT NULL,
+    encounterTypeId int NOT NULL references encounterType(id),
+    diseaseId int NOT NULL references disease(id),
     PRIMARY KEY (id)
 );
 CREATE TABLE payment
@@ -82,6 +82,7 @@ CREATE TABLE payment
     discount float(20) NOT NULL,
     PRIMARY KEY (id)
 );
+
 CREATE TABLE visit
 (
     id serial NOT NULL,

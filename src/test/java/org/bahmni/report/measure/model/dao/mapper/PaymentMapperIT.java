@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 @Transactional
@@ -21,13 +22,13 @@ public class PaymentMapperIT {
     @Autowired
     public PaymentMapper paymentMapper;
 
-
     public PaymentMapperIT() {
     }
+
     @Test
     public void shouldGetAllAppointments() {
-        Payment payment1 = new Payment(true,2030.5f,10.0f);
-        Payment payment2 = new Payment(false,2030.50f,10.0f);
+        Payment payment1 = new Payment(true, 2030.5f, 10.0f);
+        Payment payment2 = new Payment(false, 2030.50f, 10.0f);
 
         paymentMapper.insert(payment1);
         paymentMapper.insert(payment2);
@@ -35,9 +36,9 @@ public class PaymentMapperIT {
         List<Payment> payments = paymentMapper.getAll();
 
         assertEquals(2, payments.size());
-        assertEquals(true,payments.get(0).isPaid());
-        assertEquals(2030.5f,payments.get(0).getAmount());
-        assertEquals(10.0f,payments.get(0).getDiscount());
+        assertEquals(true, payments.get(0).isPaid());
+        assertEquals(2030.5f, payments.get(0).getAmount());
+        assertEquals(10.0f, payments.get(0).getDiscount());
     }
 
 }

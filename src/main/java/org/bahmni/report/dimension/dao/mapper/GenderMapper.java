@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface GenderMapper {
 
-    @Insert("INSERT INTO gender(label) values (#{label})")
+    @Insert("INSERT INTO bahmnireportsdata.gender(label) values (#{label})")
     void insert(Gender gender);
 
-    @Select({"Select * from gender"})
+    @Select({"Select * from bahmnireportsdata.gender"})
     public List<Gender> getAll();
 }

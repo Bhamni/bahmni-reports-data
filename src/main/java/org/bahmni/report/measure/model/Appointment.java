@@ -1,31 +1,30 @@
 package org.bahmni.report.measure.model;
 
 import lombok.Data;
-import org.bahmni.report.dimension.model.AppointmentType;
 
 @Data
 public class Appointment {
 
     private String id;
 
-    private String appointmentTypeId;
+    private Long appointmentTypeId;
 
-    private String diseaseId;
+    private Long diseaseId;
 
-    private String appointmentDateId;
+    private Long appointmentDateId;
 
-    private String patientGenderId;
+    private Long patientGenderId;
 
-    private String providerId;
+    private Long providerId;
 
-    private String ageId;
+    private Long ageId;
 
-    private String ageGroupId;
+    private Long ageGroupId;
 
     public Appointment() {
     }
 
-    public Appointment(String appointmentTypeId, String diseaseId, String appointmentDateId, String patientGenderId, String providerId, String ageId, String ageGroupId) {
+    public Appointment(Long appointmentTypeId, Long diseaseId, Long appointmentDateId, Long patientGenderId, Long providerId, Long ageId, Long ageGroupId) {
         this.appointmentTypeId = appointmentTypeId;
         this.diseaseId = diseaseId;
         this.appointmentDateId = appointmentDateId;

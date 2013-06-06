@@ -11,9 +11,10 @@ import java.util.List;
 
 @Repository
 public interface VisitMapper {
-    @Insert("INSERT INTO visit(visitType,admissionStatus) values (#{visitType}, #{admissionStatus})")
+
+    @Insert("INSERT INTO bahmnireportsdata.visit(visitType,admissionStatus) values (#{visitType}, #{admissionStatus})")
     void insert(Visit visit);
 
-    @Select({"Select * from visit"})
+    @Select({"Select * from bahmnireportsdata.visit"})
     public List<Visit> getAll();
 }

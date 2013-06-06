@@ -11,11 +11,11 @@ import java.util.List;
 @Repository
 public interface ObservationMapper {
 
-    @Insert("INSERT INTO observation(name, value, unit, comment, locationId, observationDateId)" +
+    @Insert("INSERT INTO bahmnireportsdata.observation(name, value, unit, comment, locationId, observationDateId)" +
             " values (#{name}, #{value}, #{unit}, #{comment}, #{locationId}, #{observationDateId})")
     void insert(Observation observation);
 
-    @Select({"Select * from observation"})
+    @Select({"Select * from bahmnireportsdata.observation"})
     public List<Observation> getAll();
 
 }

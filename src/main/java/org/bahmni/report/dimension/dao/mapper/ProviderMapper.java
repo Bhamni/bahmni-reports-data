@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface ProviderMapper {
 
-    @Insert("INSERT INTO provider(name) values (#{name})")
+    @Insert("INSERT INTO bahmnireportsdata.provider(name) values (#{name})")
     public void insert(Provider provider);
 
-    @Select({"Select * from provider"})
+    @Select({"Select * from bahmnireportsdata.provider"})
     public List<Provider> getAll();
 
 }

@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface ReferralMapper {
 
-    @Insert("INSERT INTO referral(referralType, providerId) values (#{referralType}, #{providerId})")
+    @Insert("INSERT INTO bahmnireportsdata.referral(referralType, providerId) values (#{referralType}, #{providerId})")
     void insert(Referral referral);
 
-    @Select({"Select * from referral"})
+    @Select({"Select * from bahmnireportsdata.referral"})
     public List<Referral> getAll();
 
 }

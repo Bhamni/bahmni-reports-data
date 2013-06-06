@@ -5,22 +5,22 @@ import lombok.Data;
 @Data
 public class Patient {
 
-    private String id;
+    private Long id;
 
     private String firstName;
 
     private String lastName;
 
-    private String ageId;
+    private Long ageId;
 
-    private String genderId;
+    private Long genderId;
 
-    private String locationId;
+    private Long locationId;
 
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, String ageId, String genderId, String locationId) {
+    public Patient(String firstName, String lastName, Long ageId, Long genderId, Long locationId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.ageId = ageId;

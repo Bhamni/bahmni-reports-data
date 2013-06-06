@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Observation {
 
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -15,14 +15,14 @@ public class Observation {
 
     private String comment;
 
-    private String locationId;
+    private Long locationId;
 
-    private String observationDateId;
+    private Long observationDateId;
 
     public Observation() {
     }
 
-    public Observation(String name, String value, String unit, String comment, String locationId, String observationDateId) {
+    public Observation(String name, String value, String unit, String comment, Long locationId, Long observationDateId) {
         this.name = name;
         this.value = value;
         this.unit = unit;

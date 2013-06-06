@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Order {
 
-    private String id;
+    private Long id;
 
     private OrderType type;
 
@@ -13,14 +13,14 @@ public class Order {
 
     private String orderer;
 
-    private String startDateId;
+    private Long startDateId;
 
-    private String autoExpireDateId;
+    private Long autoExpireDateId;
 
     public Order() {
     }
 
-    public Order(OrderType type, String instructions, String orderer, String startDateId, String autoExpireDateId) {
+    public Order(OrderType type, String instructions, String orderer, Long startDateId, Long autoExpireDateId) {
         this.type = type;
         this.instructions = instructions;
         this.orderer = orderer;

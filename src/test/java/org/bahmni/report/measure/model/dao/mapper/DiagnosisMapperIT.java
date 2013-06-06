@@ -1,9 +1,13 @@
 package org.bahmni.report.measure.model.dao.mapper;
 
 
-import org.bahmni.report.dimension.dao.mapper.DiseaseMapper;
-import org.bahmni.report.dimension.model.Disease;
-import org.bahmni.report.measure.model.*;
+import org.bahmni.report.dimension.dao.mapper.*;
+import org.bahmni.report.dimension.model.*;
+import org.bahmni.report.measure.model.Diagnosis;
+import org.bahmni.report.measure.model.DiagnosisStatus;
+import org.bahmni.report.measure.model.DiagnosisType;
+import org.bahmni.report.measure.model.Patient;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,25 @@ import static junit.framework.Assert.assertEquals;
 public class DiagnosisMapperIT {
 
     @Autowired
+    public DiseaseMapper diseaseMapper;
+    @Autowired
+    public AppointmentTypeMapper appointmentTypeMapper;
+    @Autowired
+    public DateDimensionMapper dateDimensionMapper;
+    @Autowired
+    public GenderMapper genderMapper;
+    @Autowired
+    public ProviderMapper providerMapper;
+    @Autowired
+    public AgeMapper ageMapper;
+    @Autowired
+    public AgeGroupMapper ageGroupMapper;
+    @Autowired
+    public LocationMapper locationMapper;
+    @Autowired
+    public PatientMapper patientMapper;
+
+    @Autowired
     public DiagnosisMapper diagnosisMapper;
 
     public DiagnosisMapperIT() {
@@ -30,21 +53,33 @@ public class DiagnosisMapperIT {
 
     @Test
     public void shouldGetAllDiagnosis() {
-        Diagnosis diagnosis1 = new Diagnosis("patientId1", "diseaseId1", "genderId1", "ageId1", "ageGrpId1", "locId1", DiagnosisStatus.Found, DiagnosisType.Primary);
-        Diagnosis diagnosis2 = new Diagnosis("patientId2", "diseaseId2", "genderId2", "ageId2", "ageGrpId2", "locId2", DiagnosisStatus.Treated, DiagnosisType.Differential);
 
-        diagnosisMapper.insert(diagnosis1);
-        diagnosisMapper.insert(diagnosis2);
+        diseaseMapper.insert(new Disease("Fever"));
+        Disease disease = diseaseMapper.getAll().get(0);
+        genderMapper.insert(new Gender("Female"));
+        Gender gender = genderMapper.getAll().get(0);
+        ageMapper.insert(new Age(60));
+        Age age = ageMapper.getAll().get(0);
+        ageGroupMapper.insert(new AgeGroup(50, 70));
+        AgeGroup ageGroup = ageGroupMapper.getAll().get(0);
+        locationMapper.insert(new Location("Karnataka", Level.State));
+        Location location = locationMapper.getAll().get(0);
+
+        patientMapper.insert(new Patient("Ram", "Singh", age.getId(), gender.getId(), location.getId()));
+        Patient patient = patientMapper.getAll().get(0);
+
+        Diagnosis diagnosis = new Diagnosis(patient.getId(), disease.getId(), gender.getId(), age.getId(), ageGroup.getId(), location.getId(), DiagnosisStatus.Found, DiagnosisType.Primary);
+        diagnosisMapper.insert(diagnosis);
 
         List<Diagnosis> diagnosises = diagnosisMapper.getAll();
 
-        assertEquals(2, diagnosises.size());
-        assertEquals("patientId1", diagnosises.get(0).getPatientId());
-        assertEquals("diseaseId1", diagnosises.get(0).getDiseaseId());
-        assertEquals("genderId1", diagnosises.get(0).getPatientGenderId());
-        assertEquals("ageId1", diagnosises.get(0).getAgeId());
-        assertEquals("ageGrpId1", diagnosises.get(0).getAgeGroupId());
-        assertEquals("locId1", diagnosises.get(0).getLocationId());
+        assertEquals(1, diagnosises.size());
+        assertEquals(patient.getId(), diagnosises.get(0).getPatientId());
+        assertEquals(disease.getId(), diagnosises.get(0).getDiseaseId());
+        assertEquals(gender.getId(), diagnosises.get(0).getPatientGenderId());
+        assertEquals(age.getId(), diagnosises.get(0).getAgeId());
+        assertEquals(ageGroup.getId(), diagnosises.get(0).getAgeGroupId());
+        assertEquals(location.getId(), diagnosises.get(0).getLocationId());
         assertEquals(DiagnosisStatus.Found, diagnosises.get(0).getDiagnosisStatus());
         assertEquals(DiagnosisType.Primary, diagnosises.get(0).getDiagnosisType());
     }

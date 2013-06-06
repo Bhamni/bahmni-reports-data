@@ -10,9 +10,9 @@ import java.util.List;
 
 @Repository
 public interface PaymentMapper {
-    @Insert("INSERT INTO payment(paid, amount, discount) values (#{paid}, #{amount}, #{discount})")
+    @Insert("INSERT INTO bahmnireportsdata.payment(paid, amount, discount) values (#{paid}, #{amount}, #{discount})")
     void insert(Payment payments);
 
-    @Select({"Select * from payment"})
+    @Select({"Select * from bahmnireportsdata.payment"})
     public List<Payment> getAll();
 }

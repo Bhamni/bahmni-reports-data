@@ -1,7 +1,8 @@
 package org.bahmni.report.measure.model.dao.mapper;
 
 
-import org.bahmni.report.measure.model.Order;
+import org.bahmni.report.dimension.dao.mapper.ProviderMapper;
+import org.bahmni.report.dimension.model.Provider;
 import org.bahmni.report.measure.model.Referral;
 import org.bahmni.report.measure.model.ReferralType;
 import org.junit.Test;
@@ -23,6 +24,8 @@ import static junit.framework.Assert.assertEquals;
 public class ReferralMapperIT {
 
     @Autowired
+    public ProviderMapper providerMapper;
+    @Autowired
     public ReferralMapper referralMapper;
 
     public ReferralMapperIT() {
@@ -30,14 +33,17 @@ public class ReferralMapperIT {
 
     @Test
     public void shouldGetAllReferrals() {
-        Referral referral = new Referral(ReferralType.In, "providerId");
-        referralMapper.insert(referral);
 
+        providerMapper.insert(new Provider("Harikesh"));
+        Provider provider = providerMapper.getAll().get(0);
+
+        Referral referral = new Referral(ReferralType.In, provider.getId());
+        referralMapper.insert(referral);
         List<Referral> referrals = referralMapper.getAll();
 
         assertEquals(1, referrals.size());
         assertEquals(ReferralType.In, referrals.get(0).getReferralType());
-        assertEquals("providerId", referrals.get(0).getProviderId());
+        assertEquals(provider.getId(), referrals.get(0).getProviderId());
     }
 
 }
