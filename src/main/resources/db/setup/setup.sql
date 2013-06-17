@@ -14,11 +14,18 @@ SET client_min_messages = warning;
 -- Name: report; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
+
+CREATE USER bahmnireports WITH PASSWORD 'bahmnireports';
+
+CREATE DATABASE bahmnireportsdata;
+
+GRANT ALL PRIVILEGES ON database bahmnireportsdata to bahmnireports;
+
 DROP SCHEMA IF EXISTS bahmnireportsdata cascade;
 
 CREATE SCHEMA bahmnireportsdata;
 
-ALTER SCHEMA bahmnireportsdata OWNER TO postgres;
+ALTER SCHEMA bahmnireportsdata OWNER TO bahmnireports;
 
 SET search_path = bahmnireportsdata, pg_catalog;
 

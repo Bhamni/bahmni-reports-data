@@ -5,7 +5,7 @@
     <import domains="person, patient, age, datetime, location, ageGroup, provider, appointment, appointmentType, disease, gender"/>
     <import platforms="db"/>
 
-    <setting name="database" default="postgres"/>
+    <setting name="database" default="bahmnireportsdata"/>
     <setting name="dbCatalog" default="bahmnireportsdata"/>
 
     <database id="db" url="{dbUrl}" driver="{dbDriver}" schema="{dbSchema}"

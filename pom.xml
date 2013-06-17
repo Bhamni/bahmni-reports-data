@@ -135,14 +135,13 @@
                     <target name="init">
                         <echo message="init db" />
                         <exec executable="dropdb">
-                            <arg line="-U postgres bahmnireportsdata" />
-                        </exec>
-                        <exec executable="createdb">
+                            <env key="PGPASSWORD" value="password"/>
                             <arg line="-U postgres bahmnireportsdata" />
                         </exec>
                         <echo message="Setting up schema" />
                         <exec executable="psql">
-                            <arg line="-U postgres" />
+                            <env key="PGPASSWORD" value="bahmnireports"/>
+                            <arg line="-U bahmnireports" />
                             <arg line="-d bahmnireportsdata" />
                             <arg line="-f ${project.basedir}//src/main/resources/db/setup/setup.sql" />
                         </exec>
@@ -165,8 +164,8 @@
                 <configuration>
                     <url>jdbc:postgresql://localhost:5432/bahmnireportsdata</url>
                     <driver>org.postgresql.Driver</driver>
-                    <user>postgres</user>
-                    <password>password</password>
+                    <user>bahmnireports</user>
+                    <password>bahmnireports</password>
                     <schemas>
                         <schema>bahmnireportsdata</schema>
                     </schemas>
@@ -206,8 +205,8 @@
                     <dbDriver>org.postgresql.Driver</dbDriver>
                     <dbUrl>jdbc:postgresql://localhost:5432/bahmnireportsdata</dbUrl>
                     <dbSchema>bahmnireportsdata</dbSchema>
-                    <dbUser>postgres</dbUser>
-                    <dbPassword>password</dbPassword>
+                    <dbUser>bahmnireports</dbUser>
+                    <dbPassword>bahmnireports</dbPassword>
                 </configuration>
             </plugin>
         </plugins>
