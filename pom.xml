@@ -133,17 +133,12 @@
                 </executions>
                 <configuration>
                     <target name="init">
-                        <echo message="init db" />
-                        <exec executable="dropdb">
-                            <env key="PGPASSWORD" value="password"/>
-                            <arg line="-U postgres bahmnireportsdata" />
-                        </exec>
                         <echo message="Setting up schema" />
                         <exec executable="psql">
-                            <env key="PGPASSWORD" value="bahmnireports"/>
-                            <arg line="-U bahmnireports" />
+                            <env key="PGPASSWORD" value="password"/>
+                            <arg line="-U postgres" />
                             <arg line="-d bahmnireportsdata" />
-                            <arg line="-f ${project.basedir}//src/main/resources/db/setup/setup.sql" />
+                            <arg line="-f ${project.basedir}/src/main/resources/db/setup/setup.sql" />
                         </exec>
                     </target>
                 </configuration>
