@@ -137,7 +137,6 @@
                         <exec executable="psql">
                             <env key="PGPASSWORD" value="password"/>
                             <arg line="-U postgres" />
-                            <arg line="-d bahmnireportsdata" />
                             <arg line="-f ${project.basedir}/src/main/resources/db/setup/setup.sql" />
                         </exec>
                     </target>
